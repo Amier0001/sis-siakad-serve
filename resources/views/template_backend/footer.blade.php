@@ -1,6 +1,6 @@
 <footer class="main-footer">
         <marquee>
-            <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="http://Facebook.com/Amierrudin/">Smart School Universe</a>. </strong>
+            <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="#">Team Development SISAKAD</a>. </strong>
         </marquee>
     </footer>
 
