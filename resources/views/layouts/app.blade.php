@@ -27,7 +27,7 @@
 
     <footer style="color: white;">
       <marquee>
-          <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="#" style="color: white;">Team Development SISAKAd</a>. </strong>
+          <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="#" style="color: white;">Team Development SISAKAD</a>. </strong>
       </marquee>
     </footer>
   </div>
