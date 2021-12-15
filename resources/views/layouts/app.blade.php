@@ -27,7 +27,7 @@
 
     <footer style="color: white;">
       <marquee>
-          <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="http://smkn1jenpo.sch.id/" style="color: white;">Smart School Universe</a>. </strong>
+          <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> &diams; <a href="#" style="color: white;">Team Development SISAKAd</a>. </strong>
       </marquee>
     </footer>
   </div>
@@ -92,7 +92,7 @@
 
 @error('id_card')
   <script>
-    toastr.error("Maaf User ini tidak terdaftar sebagai Guru SMKN 1 Jenangan Ponorogo!");
+    toastr.error("Maaf User ini tidak terdaftar sebagai Guru Sokolah ini");
   </script>
 @enderror
 @error('guru')
@@ -102,7 +102,7 @@
 @enderror
 @error('no_induk')
   <script>
-    toastr.error("Maaf User ini tidak terdaftar sebagai Siswa SMKN 1 Jenangan Ponorogo!");
+    toastr.error("Maaf User ini tidak terdaftar sebagai Siswa Sekolah ini!");
   </script>
 @enderror
 @error('siswa')
