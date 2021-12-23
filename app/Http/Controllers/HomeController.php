@@ -35,15 +35,8 @@ class HomeController extends Controller
     {
         $hari = date('w');
         $jam = date('H:i');
-        $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
-        $pengumuman = Pengumuman::first();
-        $kehadiran = Kehadiran::all();
-        return view('home', compact('jadwal', 'pengumuman', 'kehadiran'));
-    }
-
-    public function admin()
-    {
         $jadwal = Jadwal::count();
+        $pengumuman = Pengumuman::first();
         $guru = Guru::count();
         $gurulk = Guru::where('jk', 'L')->count();
         $gurupr = Guru::where('jk', 'P')->count();
@@ -56,6 +49,7 @@ class HomeController extends Controller
         $ei = Kelas::where('paket_id', '3')->count();
         $oi = Kelas::where('paket_id', '4')->count();
         $tbsm = Kelas::where('paket_id', '6')->count();
+        $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
         $rpl = Kelas::where('paket_id', '7')->count();
         $tpm = Kelas::where('paket_id', '5')->count();
         $las = Kelas::where('paket_id', '8')->count();
@@ -70,12 +64,14 @@ class HomeController extends Controller
             'siswalk',
             'siswapr',
             'siswa',
+            'pengumuman',
             'kelas',
             'bkp',
             'dpib',
             'ei',
             'oi',
             'tbsm',
+            'jadwal',
             'rpl',
             'tpm',
             'las',
@@ -83,5 +79,15 @@ class HomeController extends Controller
             'user',
             'paket'
         ));
+    }
+
+    public function admin()
+    {
+        $hari = date('w');
+        $jam = date('H:i');
+        $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
+        $pengumuman = Pengumuman::first();
+        $kehadiran = Kehadiran::all();
+        return view('home', compact('jadwal', 'pengumuman', 'kehadiran'));
     }
 }

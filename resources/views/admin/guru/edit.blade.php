@@ -1,19 +1,18 @@
 @extends('template_backend.home')
-@section('heading', 'Edit Guru')
+@section('heading')
 @section('page')
-  <li class="breadcrumb-item active"><a href="{{ route('guru.index') }}">Guru</a></li>
-  <li class="breadcrumb-item active">Edit Guru</li>
+  <li class="breadcrumb-item active">Dashboard</a></li>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <!-- general form elements -->
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">Edit Data Guru</h3>
-      </div>
-      <!-- /.card-header -->
-      <!-- form start -->
-      <form action="{{ route('guru.update', $guru->id) }}" method="post">
+<div class="content-body">
+  <div class="container-fluid">
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Ubah Data Guru</a></li>
+			</ol>
+    </div>
+    <!-- row -->
+    <form action="{{ route('guru.update', $guru->id) }}" method="post">
         @csrf
         @method('patch')
         <div class="card-body">
@@ -88,8 +87,8 @@
           <button name="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Tambahkan</button>
         </div>
       </form>
-    </div>
-    <!-- /.card -->
+
+  </div>
 </div>
 @endsection
 @section('script')

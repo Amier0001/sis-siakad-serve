@@ -1,30 +1,37 @@
 @extends('template_backend.home')
-@section('heading')
-  Data Siswa {{ $kelas->nama_kelas }}
-@endsection
+@section('heading', 'Data Siswa')
 @section('page')
   <li class="breadcrumb-item active"><a href="{{ route('siswa.index') }}">Siswa</a></li>
   <li class="breadcrumb-item active">{{ $kelas->nama_kelas }}</li>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <div class="card">
+<div class="content-body">
+  <div class="container-fluid">
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Admin</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Data Siswa</a></li>
+			</ol>
+    </div>
+    <!-- row -->
+    <div class="col-lg-12">
+      <div class="card">
         <div class="card-header">
-            <a href="{{ route('siswa.index') }}" class="btn btn-default btn-sm"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</a>
+            <a href="{{ route('siswa.index') }}" class="btn btn-danger btn-sm"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</a>
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped table-hover">
-            <thead>
+          <div class="table-responsive">
+            <table class="table table-responsive-sm">
+              <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Nama Siswa</th>
-                    <th>No Induk</th>
-                    <th>Foto</th>
-                    <th>Aksi</th>
+                  <th>No</th>
+                  <th>Nama Siswa</th>
+                  <th>No Induk</th>
+                  <th>Foto</th>
+                  <th>Aksi</th>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
                 @foreach ($siswa as $data)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
@@ -47,14 +54,14 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <!-- /.card-body -->
+      </div>
     </div>
-    <!-- /.card -->
+  </div>
 </div>
-<!-- /.col -->
 @endsection
 @section('script')
     <script>

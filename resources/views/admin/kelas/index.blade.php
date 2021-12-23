@@ -1,30 +1,36 @@
 @extends('template_backend.home')
-@section('heading', 'Data Kelas')
+@section('heading', 'Dashboard')
 @section('page')
-  <li class="breadcrumb-item active">Data Kelas</li>
+  <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">
-              <button type="button" class="btn btn-primary btn-sm" onclick="getCreateKelas()" data-toggle="modal" data-target="#form-kelas">
-                  <i class="nav-icon fas fa-folder-plus"></i> &nbsp; Tambah Data Kelas
-              </button>
-          </h3>
+<div class="content-body">
+  <div class="container-fluid">
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Admin</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Data Kelas</a></li>
+			</ol>
+    </div>
+    <!-- row -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header-lift">
+          <button type="button" class="btn btn-rounded btn-info" onclick="getCreateKelas()" data-bs-toggle="modal" data-bs-target="#form-kelas"><span class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
+          </span>&nbsp; Tambah Data Kelas</button> 
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped table-hover">
-            <thead>
+          <div class="table-responsive">
+            <table class="table table-responsive-sm">
+              <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Kelas</th>
-                    <th>Wali Kelas</th>
-                    <th>Aksi</th>
+                  <th>No</th>
+                  <th>Nama Kelas</th>
+                  <th>Wali Kelas</th>
+                  <th>Aksi</th>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
                 @foreach ($kelas as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -47,147 +53,62 @@
                         </form>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-</div>
-<!-- /.col -->
-
-<!-- Extra large modal -->
-<div class="modal fade bd-example-modal-md" id="form-kelas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-          <h4 class="modal-title" id="judul"></h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('kelas.store') }}" method="post">
-          @csrf
-          <div class="row">
-            <div class="col-md-12">
-              <input type="hidden" id="id" name="id">
-              <div class="form-group" id="form_nama"></div>
-              <div class="form-group" id="form_paket"></div>
-              <div class="form-group">
-                <label for="guru_id">Wali Kelas</label>
-                <select id="guru_id" name="guru_id" class="select2bs4 form-control @error('guru_id') is-invalid @enderror">
-                  <option value="">-- Pilih Wali Kelas --</option>
-                  @foreach ($guru as $data)
-                    <option value="{{ $data->id }}">{{ $data->nama_guru }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
+                @endforeach                  
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</button>
-            <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Tambahkan</button>
-      </form>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Extra large modal -->
-<div class="modal fade bd-example-modal-lg view-siswa" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+{{-- Modal Tambah Kelas --}}
+<div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" id="form-kelas">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="judul-siswa">View Siswa</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <h3 class="modal-title" id="judul">Tambah Data Kelas</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
-              <table class="table table-bordered table-striped table-hover" width="100%">
-                <thead>
-                  <tr>
-                    <th>No Induk Siswa</th>
-                    <th>Nama Siswa</th>
-                    <th>L/P</th>
-                    <th>Foto Siswa</th>
-                  </tr>
-                </thead>
-                <tbody id="data-siswa">
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>No Induk Siswa</th>
-                    <th>Nama Siswa</th>
-                    <th>L/P</th>
-                    <th>Foto Siswa</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.col -->
+        <form action="{{ route('kelas.store') }}" method="post">
+        @csrf
+          <div class="row">
+              <div class="mb-3 col-md-6">
+                    <input type="hidden" id="id" name="id">
+                  <label class="form-label" for="nama_kelas">Nama Kelas</label>
+                  <input type='text' id="nama_kelas" name='nama_kelas' class="form-control @error('nama_kelas') is-invalid @enderror">
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="paket_id">Pekat Keahlian</label>
+                  <select id="paket_id" name="paket_id" class="form-control default-select wide @error('paket_id') is-invalid @enderror select2bs4">
+                        <option value="">-- Pilih Paket Keahlian --</option>
+                        @foreach ($paket as $data)
+                            <option value="{{ $data->id }}">{{ $data->ket }}</option>
+                        @endforeach
+                  </select>
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="guru_id">Wali Kelas</label>
+                  <select id="guru_id" name="guru_id" class="form-control default-select wide @error('guru_id') is-invalid @enderror select2bs4">
+                        <option value="">-- Pilih Wali Kelas --</option>
+                        @foreach ($guru as $data)
+                            <option value="{{ $data->id }}">{{ $data->nama_guru }}</option>
+                        @endforeach
+                  </select>
+              </div>
           </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</button>
-          <a id="link-siswa" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp; Download PDF</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Extra large modal -->
-<div class="modal fade bd-example-modal-xl view-jadwal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title" id="judul-jadwal">View Jadwal</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card-body">
-            <table class="table table-bordered table-striped table-hover" width="100%">
-              <thead>
-                <tr>
-                  <th>Hari</th>
-                  <th>Jadwal</th>
-                  <th>Jam Pelajaran</th>
-                  <th>Ruang Kelas</th>
-                </tr>
-              </thead>
-              <tbody id="data-jadwal">
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Hari</th>
-                  <th>Jadwal</th>
-                  <th>Jam Pelajaran</th>
-                  <th>Ruang Kelas</th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <!-- /.col -->
-        </div>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</button>
-        <a id="link-jadwal" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp; Download PDF</a>
+        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary"> &nbsp; Tambahkan</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+{{-- End Modal Tambah Mapel --}}
 @endsection
 @section('script')
   <script>

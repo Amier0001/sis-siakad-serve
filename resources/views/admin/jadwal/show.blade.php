@@ -1,31 +1,38 @@
 @extends('template_backend.home')
 @section('heading')
-  Data Jadwal {{ $kelas->nama_kelas }}
-@endsection
 @section('page')
   <li class="breadcrumb-item active"><a href="{{ route('jadwal.index') }}">Jadwal</a></li>
   <li class="breadcrumb-item active">{{ $kelas->nama_kelas }}</li>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <div class="card">
+<div class="content-body">
+  <div class="container-fluid">
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Jadwal</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">{{ $kelas->nama_kelas }}</a></li>
+			</ol>
+    </div>
+    <!-- row -->
+    <div class="col-lg-12">
+      <div class="card">
         <div class="card-header">
-            <a href="{{ route('jadwal.index') }}" class="btn btn-default btn-sm"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</a>
+            <a href="{{ route('jadwal.index') }}" class="btn btn-danger btn-sm"><i class="nav-icon fas fa-arrow-left"></i> &nbsp; Kembali</a>
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped table-hover">
-            <thead>
+          <div class="table-responsive">
+            <table class="table table-responsive-sm">
+              <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Hari</th>
-                    <th>Jadwal</th>
-                    <th>Jam Pelajaran</th>
-                    <th>Ruang Kelas</th>
-                    <th>Aksi</th>
+                  <th>No</th>
+                  <th>Hari</th>
+                  <th>Jadwal</th>
+                  <th>Jam Pelajaran</th>
+                  <th>Ruang Kelas</th>
+                  <th>Aksi</th>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
                 @foreach ($jadwal as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -45,15 +52,15 @@
                       </form>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
-          </table>
+                @endforeach         
+              </tbody>
+            </table>
+          </div>
         </div>
-        <!-- /.card-body -->
+      </div>
     </div>
-    <!-- /.card -->
+  </div>
 </div>
-<!-- /.col -->
 @endsection
 @section('script')
     <script>

@@ -1,29 +1,35 @@
 @extends('template_backend.home')
-@section('heading', 'Data User')
+@section('heading', 'Dashboard')
 @section('page')
-  <li class="breadcrumb-item active">Data User</li>
+  <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".tambah-user">
-                    <i class="nav-icon fas fa-folder-plus"></i> &nbsp; Tambah Data User
-                </button>
-            </h3>
+<div class="content-body">
+  <div class="container-fluid">
+		<div class="row page-titles">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active"><a href="javascript:void(0)">Admin</a></li>
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Data Pengguna</a></li>
+			</ol>
+    </div>
+    <!-- row -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header-lift">
+          <button type="button" class="btn btn-rounded btn-info" data-bs-toggle="modal" data-bs-target="#tambah-user"><span class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
+          </span>&nbsp; Tambah Data Pengguna</button> 
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <table class="table table-bordered table-striped table-hover">
-            <thead>
+          <div class="table-responsive">
+            <table class="table table-responsive-sm">
+              <thead>
                 <tr>
-                    <th>Level User</th>
-                    <th>Jumlah User</th>
-                    <th>Lihat User</th>
+                  <th>Level User</th>
+                  <th>Jumlah User</th>
+                  <th>Lihat User</th>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
                 @foreach ($user as $role => $data)
                   <tr>
                     <td>{{ $role }}</td>
@@ -32,83 +38,83 @@
                       <a href="{{ route('user.show', Crypt::encrypt($role)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Ditails</a>
                     </td>
                   </tr>
-                @endforeach
-            </tbody>
-          </table>
+                @endforeach                  
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-<!-- Extra large modal -->
-<div class="modal fade bd-example-modal-md tambah-user" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md" role="document">
+{{-- Modal Tambah Siswa --}}
+<div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" id="tambah-user">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Tambah Data User</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <div class="modal-header">
+        <h3 class="modal-title" id="judul">Tambah Data Pengguna</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
         </button>
-    </div>
-    <div class="modal-body">
+      </div>
+      <div class="modal-body">
         <form action="{{ route('user.store') }}" method="post">
-          @csrf
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="email">E-Mail Address</label>
-                  <input id="email" type="email" placeholder="{{ __('E-Mail Address') }}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+        @csrf
+          <div class="row">
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="email">E-Mail Address</label>
+                  <input type='email' id="email" name='email' class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" autocomplete="email">
                   @error('email')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                   @enderror
-                </div>
-                <div class="form-group">
-                  <label for="role">Level User</label>
-                  <select id="role" type="text" class="form-control @error('role') is-invalid @enderror select2bs4" name="role" value="{{ old('role') }}" autocomplete="role">
-                    <option value="">-- Select {{ __('Level User') }} --</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Operator">Operator</option>
-                    <option value="Guru">Guru</option>
-                    <option value="Siswa">Siswa</option>
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="role">Level User</label>
+                  <select id="role" name="role" class="form-control default-select wide @error('role') is-invalid @enderror select2bs4" value="{{ old('role') }}" autocomplete="role">
+                        <option value="">-- Select {{ __('Level User') }} --</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Operator">Operator</option>
+                        <option value="Guru">Guru</option>
+                        <option value="Siswa">Siswa</option>
                   </select>
                   @error('role')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                   @enderror
-                </div>
-                <div class="form-group" id="noId">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input id="password" type="password" placeholder="{{ __('Password') }}" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-                  @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
-                <div class="form-group">
-                  <label for="password-confirm">Confirm Password</label>
-                  <input id="password-confirm" type="password" placeholder="{{ __('Confirm Password') }}" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" autocomplete="new-password">
-                  @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
               </div>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><i class='nav-icon fas fa-arrow-left'></i> &nbsp; Kembali</button>
-            <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Tambahkan</button>
-        </form>
-    </div>
+              <div class="form-group" id="noId">
+                </div>
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="password">Password</label>
+                  <input type='password' id="password" name='password' placeholder="{{ __('Password') }}" class="form-control @error('password') is-invalid @enderror" autocomplete="new-password">
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label class="form-label" for="password-confirm">Confirm Password</label>
+                  <input type='password' id="password-confirm" name='password-confirm' class="form-control @error('password-confirm') is-invalid @enderror" placeholder="{{ __('Confirm Password') }}" name="password_confirmation" autocomplete="new-password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary"> &nbsp; Tambahkan</button>
+      </div>
+      </form>
     </div>
   </div>
 </div>
+{{-- End Modal Tambah Mapel --}}
 @endsection
 @section('script')
   <script>

@@ -5,177 +5,228 @@
   <li class="breadcrumb-item active">Dashboard</li>
 @endsection
 @section('content')
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ $jadwal }}</h3>
-                <p>Jadwal</p>
+	<div class="content-body">
+            <!-- row -->
+			
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="row">
+							<div class="col-xl-6">
+								<div class="row">
+								
+									{{-- Banner sisakad --}}
+									<div class="col-xl-12">
+										<div class="card tryal-gradient">
+											<div class="card-body tryal row">
+												<div class="col-xl-7 col-sm-6">
+													<h2>SISAKAD</h2>
+													<h3>Sistem Informasi Akademik Sekolah </h3>
+													<a href="javascript:void(0);" class="btn btn-rounded  fs-18 font-w500">Try Free Now</a>
+												</div>
+												<div class="col-xl-5 col-sm-6">
+													<img src="../themeds/images/chart.png" alt="" class="sd-shape">
+												</div>
+											</div>
+										</div>
+									</div>
+									{{-- End Banner sisakad --}}
+									{{-- Pengumuman --}}
+									<div class="col-xl-12">
+										<div class="card">
+											<div class="card-header border-0">
+												<div>
+													<h4 class="fs-20 font-w700">Pengumuman</h4>
+												</div>
+												<div>
+													<a href="javascript:void(0);" class="btn btn-outline-primary btn-rounded fs-18">View More</a>
+												</div>
+											</div>
+											<div class="card-body px-0">
+												<div class="d-flex justify-content-between recent-emails">
+													<div class="d-flex">
+														<div class="profile-k">
+															<span class="bg-success">K</span>	
+														</div>
+														<div class="ms-3">
+															<h4 class="fs-18 font-w500">Pengumuman Hasil Ujian Akhir Semester</h4>
+															<span class="font-w400 d-block">{!! $pengumuman->isi !!}</span>
+														</div>
+													</div>
+													<div class="email-check">
+														<label class="like-btn mb-0">
+															  <input type="checkbox">
+															  <span class="checkmark"></span>
+														</label>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									{{-- End Pengumuman --}}
+								</div>
+							</div>
+							<div class="col-xl-6">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="row">
+											{{-- Total Siswa --}}
+											<div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+												<div class="widget-stat card bg-primary">
+													<div class="card-body p-4">
+														<div class="media">
+															<span class="me-3">
+																<i class="flaticon-381-user-7" href="{{ route('siswa.index') }}"></i>
+															</span>
+															<div class="media-body text-white text-end">
+																<p class="mb-1">Total Siswa</p>
+																<h3 class="text-white">{{ $siswa }}</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											{{-- End Total Siswa --}}
+											{{-- Total Guru --}}
+											<div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+												<div class="widget-stat card bg-danger">
+													<div class="card-body p-4">
+														<div class="media">
+															<span class="me-3">
+																<i class="flaticon-381-user-9" href="{{ route('guru.index') }}"></i>
+															</span>
+															<div class="media-body text-white text-end">
+																<p class="mb-1">Total Guru</p>
+																<h3 class="text-white">{{ $guru }}</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											{{-- End Guru --}}
+											{{-- Kelas --}}
+											<div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+												<div class="widget-stat card bg-warning">
+													<div class="card-body p-4">
+														<div class="media">
+															<span class="me-3">
+																<i class="flaticon-381-home-1" href="{{ route('kelas.index') }}"></i>
+															</span>
+															<div class="media-body text-white text-end">
+																<p class="mb-1">Kelas</p>
+																<h3 class="text-white">{{ $kelas }}</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											{{-- End Kelas --}}
+											{{-- Mapel --}}
+											<div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+												<div class="widget-stat card bg-success">
+													<div class="card-body p-4">
+														<div class="media">
+															<span class="me-3">
+																<i class="flaticon-381-menu" href="{{ route('mapel.index') }}"></i>
+															</span>
+															<div class="media-body text-white text-end">
+																<p class="mb-1">Mapel</p>
+																<h3 class="text-white">{{ $mapel }}</h3>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											{{-- End Mapel --}}
+										</div>
+									</div>
+									{{-- Kelas/Paket keahlian --}}
+									<div class="col-xl-12 col-lg-12">
+										<div class="row">
+											<div class="col-xl-6 col-xxl-12 col-sm-6">
+												<div class="card">
+													<div class="card-header border-0">
+														<div>
+															<h4 class="fs-20 font-w700">Kelas / Paket Keahlian</h4>
+														</div>	
+													</div>	
+													<div class="card-body">
+														<div id="emailchart"> </div>
+														<div class="mb-3 mt-4">
+															<h4 class="fs-18 font-w600">Keterangan</h4>
+														</div>
+														<div>
+															<div class="d-flex align-items-center justify-content-between mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#886CC0"></rect>
+																	</svg>
+																	Bisnis kontruksi dan Properti
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#26E023"></rect>
+																	</svg>
+																	Desain Permodelan dan Informasi Bangunan
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#61CFF1"></rect>
+																	</svg>
+																	Elektronika Industri
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#FFDA7C"></rect>
+																	</svg>
+																	Otomasi Industri 
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#FF86B1"></rect>
+																	</svg>
+																	Teknik dan Bisnis Sepeda Motor 
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#999999"></rect>
+																	</svg>
+																	Rekayasa Perangkat Lunak 
+																</span>
+															</div>
+															<div class="d-flex align-items-center justify-content-between  mb-4">
+																<span class="fs-18 font-w500">	
+																	<svg class="me-3" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect width="20" height="20" rx="6" fill="#0b2e75"></rect>
+																	</svg>
+																	Teknik Pemesin
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>	
+										</div>	
+									</div>
+									{{-- End Kelas/Paket Keahlian --}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
-            <div class="icon">
-                <i class="fas fa-calendar-alt nav-icon"></i>
-            </div>
-            <a href="{{ route('jadwal.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
-    </div>
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-warning">
-            <div class="inner" style="color: #FFFFFF;">
-                <h3>{{ $guru }}</h3>
-                <p>Guru</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-id-card nav-icon"></i>
-            </div>
-            <a href="{{ route('guru.index') }}" style="color: #FFFFFF !important;" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>{{ $siswa }}</h3>
-                <p>Siswa</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-id-card nav-icon"></i>
-            </div>
-            <a href="{{ route('siswa.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>{{ $kelas }}</h3>
-                <p>Kelas</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-home nav-icon"></i>
-            </div>
-            <a href="{{ route('kelas.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>{{ $mapel }}</h3>
-                <p>Mapel</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-book nav-icon"></i>
-            </div>
-            <a href="{{ route('mapel.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-4 col-6">
-        <div class="small-box bg-secondary">
-            <div class="inner">
-                <h3>{{ $user }}</h3>
-                <p>User Registrations</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user-plus nav-icon"></i>
-            </div>
-            <a href="{{ route('user.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">DataGuru</span>
-                    </p>
-                    <p class="ml-auto d-flex flex-column text-right">
-                        <span class="text-success">
-                            <i class="fas fa-arrow-up"></i> {{ $guru }}
-                        </span>
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive">
-                                <canvas id="pieChartGuru" height="200"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix">
-                                <li><i class="far fa-circle text-primary"></i> Laki-laki</li>
-                                <li><i class="far fa-circle text-danger"></i> Perempuan</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">Data Siswa</span>
-                    </p>
-                    <p class="ml-auto d-flex flex-column text-right">
-                        <span class="text-success">
-                            <i class="fas fa-arrow-up"></i> {{ $siswa }}
-                        </span>
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive">
-                                <canvas id="pieChartSiswa" height="200"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix">
-                                <li><i class="far fa-circle text-primary"></i> Laki-laki</li>
-                                <li><i class="far fa-circle text-danger"></i> Perempuan</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex">
-                    <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">Kelas / Paket Keahlian </span>
-                    </p>
-                    <p class="ml-auto d-flex flex-column text-right">
-                        <span class="text-success">
-                            <i class="fas fa-arrow-up"></i> {{ $kelas }}
-                        </span>
-                    </p>
-                </div>
-                <div class="position-relative mb-4">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive">
-                                <canvas id="pieChartPaket" height="150"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix">
-                                <li><i class="far fa-circle" style="color: #d4c148"></i> Bisnis kontruksi dan Properti</li>
-                                <li><i class="far fa-circle" style="color: #ba6906"></i> Desain Permodelan dan Informasi Bangunan</li>
-                                <li><i class="far fa-circle" style="color: #ff990a"></i> Elektronika Industri</li>
-                                <li><i class="far fa-circle" style="color: #00a352"></i> Otomasi Industri</li>
-                                <li><i class="far fa-circle" style="color: #2cabe6"></i> Teknik dan Bisnis Sepeda Motor</li>
-                                <li><i class="far fa-circle" style="color: #999999"></i> Rekayasa Perangkat Lunak</li>
-                                <li><i class="far fa-circle" style="color: #0b2e75"></i> Teknik Pemesinan</li>
-                                <li><i class="far fa-circle" style="color: #7980f7"></i> Teknik Pengelasan</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('script')
     <script type="text/javascript">
@@ -246,7 +297,7 @@
                 datasets: [
                     {
                     data: [{{ $bkp }}, {{ $dpib }}, {{ $ei }}, {{ $oi }}, {{ $tbsm }}, {{ $rpl }}, {{ $tpm }}, {{ $las }}],
-                    backgroundColor : ['#d4c148', '#ba6906', '#ff990a', '#00a352', '#2cabe6', '#999999', '#0b2e75', '#7980f7'],
+                    backgroundColor : ['#886CC0', '#26E023', '##61CFF1', '#00a352', '#2cabe6', '#999999', '#999999', '#7980f7'],
                     }
                 ]
             }
